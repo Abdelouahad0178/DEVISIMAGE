@@ -12,9 +12,45 @@
 
 
     {
-        "nom": "1ANIKSA_PULIDO_120x260",
+        "nom": "1cream-rect-100x100-cm",
+        "prix": 250,
+        "image": "/images/1cream-rect-100x100-cm.jpg"
+    },
+    {
+        "nom": "1gravity_oxide_60x120cm",
+        "prix": 300.0,
+        "image": "/images/1gravity_oxide_60x120cm.jpg"
+    },
+
+
+    {
+        "nom": "1leonardo-white-rect-poli-60x120-cm",
         "prix": 25.5,
-        "image": "/images/1ANIKSA_PULIDO_120x260.jpg"
+        "image": "/images/1leonardo-white-rect-poli-60x120-cm.jpg"
+    },
+    {
+        "nom": "1Platinum-Beige-120x260cm",
+        "prix": 30.0,
+        "image": "/images/1Platinum-Beige-120x260cm.jpg"
+    },
+
+
+
+    {
+        "nom": "1playwood-Cream-20x120cm",
+        "prix": 250.5,
+        "image": "/images/1playwood-Cream-20x120cm.jpg"
+    },
+    {
+        "nom": "1SKIFER_BRUN_60X120",
+        "prix": 30.0,
+        "image": "/images/1SKIFER_BRUN_60X120.jpg"
+    },
+
+    {
+        "nom": "1VESTIGE260X120_VESTIGE_PULIDO",
+        "prix": 25.5,
+        "image": "/images/1VESTIGE260X120_VESTIGE_PULIDO.jpg"
     },
     {
         "nom": "1Chalet_Cervinia-honey_20_122cm",
@@ -23,68 +59,7 @@
     },
 
 
-    {
-        "nom": "1ANIKSA_PULIDO_120x260",
-        "prix": 25.5,
-        "image": "/images/1ANIKSA_PULIDO_120x260.jpg"
-    },
-    {
-        "nom": "1Chalet_Cervinia-honey_20_122cm",
-        "prix": 30.0,
-        "image": "/images/1Chalet_Cervinia-honey_20_122cm.jpg"
-    },
-
-
-
-    {
-        "nom": "1ANIKSA_PULIDO_120x260",
-        "prix": 25.5,
-        "image": "/images/1ANIKSA_PULIDO_120x260.jpg"
-    },
-    {
-        "nom": "1Chalet_Cervinia-honey_20_122cm",
-        "prix": 30.0,
-        "image": "/images/1Chalet_Cervinia-honey_20_122cm.jpg"
-    },
-
-    {
-        "nom": "1ANIKSA_PULIDO_120x260",
-        "prix": 25.5,
-        "image": "/images/1ANIKSA_PULIDO_120x260.jpg"
-    },
-    {
-        "nom": "1Chalet_Cervinia-honey_20_122cm",
-        "prix": 30.0,
-        "image": "/images/1Chalet_Cervinia-honey_20_122cm.jpg"
-    }
-
-
-    ,
-
-    {
-        "nom": "1ANIKSA_PULIDO_120x260",
-        "prix": 25.5,
-        "image": "/images/1ANIKSA_PULIDO_120x260.jpg"
-    },
-    {
-        "nom": "1Chalet_Cervinia-honey_20_122cm",
-        "prix": 30.0,
-        "image": "/images/1Chalet_Cervinia-honey_20_122cm.jpg"
-    }
-    ,
-
-    {
-        "nom": "1ANIKSA_PULIDO_120x260",
-        "prix": 25.5,
-        "image": "/images/1ANIKSA_PULIDO_120x260.jpg"
-    },
-    {
-        "nom": "1Chalet_Cervinia-honey_20_122cm",
-        "prix": 30.0,
-        "image": "/images/1Chalet_Cervinia-honey_20_122cm.jpg"
-    }
-
-    ,
+  
 
     {
         "nom": "1ANIKSA_PULIDO_120x260",

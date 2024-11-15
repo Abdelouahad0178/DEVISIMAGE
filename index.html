@@ -7,30 +7,67 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- En-tête de la facture -->
+    <div id="header-container">
+        <!-- Première partie de l'en-tête -->
+        <div id="header-top">
+            <img src="/images/MAISON CARRELAGE.jpg" alt="En-tête de Maison Carrelage" id="header-image">
+            <div id="devis-number">
+                <label for="facture">DEVIS N°:</label>
+                <input type="text" id="facture" placeholder="FC24100033">
+            </div>
+        </div>
+        
+        <!-- Deuxième partie de l'en-tête -->
+        <div id="header-info">
+            <div>
+                <label for="date">Date:</label>
+                <input type="date" id="date" value="2024-11-10">
+            </div>
+            <div>
+                <label for="code">Code:</label>
+                <input type="text" id="code" placeholder="Entrer le code">
+            </div>
+            <div>
+                <label for="client-name">Nom Client:</label>
+                <input type="text" id="client-name" placeholder="Nom du client">
+            </div>
+            <div>
+                <label for="phone">Téléphone Client:</label>
+                <input type="text" id="phone" placeholder="Ex: +212600000000">
+            </div>
+
+
+
+            <div>
+                <label for="ice">ICE Client:</label>
+                <input type="text" id="ice" placeholder="003472596000011">
+            </div>
+        </div>
+    </div>
+
     <h1>Production de Devis</h1>
 
-    <!-- Zone de recherche -->
+    <!-- Zone de recherche (masquée lors de l'impression) -->
     <div>
         <input type="text" id="search-bar" placeholder="Rechercher un produit..." oninput="rechercherProduit()">
     </div>
 
-    <!-- Palette déroulante horizontale -->
+    <!-- Palette déroulante horizontale (masquée lors de l'impression) -->
     <div id="palette-container" style="overflow-x: auto; white-space: nowrap; border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
         <!-- Les photos des produits seront chargées ici -->
     </div>
 
     <!-- Section du devis -->
-    <h2>Devis</h2>
     <div id="devis-container">
         <table id="devis">
             <thead>
                 <tr>
-                    <th>Produit</th>
-                    <th>Prix (modifiable)</th>
-                    <th>Quantité</th>
-                    <th>Total</th>
-                    <th>Photo</th>
-                    <th>Actions</th>
+                    <th class="produit-col">Produit</th>
+                    <th class="prix-col">Prix (modifiable)</th>
+                    <th class="quantite-col">Quantité</th>
+                    <th class="total-col">Total</th>
+                    <th class="photo-col">Photo</th>
                 </tr>
             </thead>
             <tbody></tbody>
@@ -38,10 +75,42 @@
         <h6 id="total-devis">Total: 0 DH</h6>
     </div>
 
-    <!-- Boutons d'actions -->
+    <!-- Affichage des informations pour l'impression -->
+    <div id="print-header-info">
+        <p><strong>Date:</strong> <span id="print-date"></span></p>
+        <p><strong>Code:</strong> <span id="print-code"></span></p>
+        <p><strong>Nom Client:</strong> <span id="print-client-name"></span></p>
+        
+        
+        
+        <p><strong>DEVIS N°:</strong> <span id="print-facture"></span></p>
+        <p><strong>ICE Client:</strong> <span id="print-ice"></span></p>
+    </div>
+
+    <!-- Boutons d'actions (masqués lors de l'impression) -->
     <div style="margin-top: 20px;">
         <button onclick="imprimerDevis()">Imprimer le devis</button>
         <button onclick="reinitialiserDevis()" style="background-color: red; color: white;">Réinitialiser le devis</button>
+        <button onclick="exporterDevis()">Enregistrer en JSON</button>
+        <input type="file" id="importer-devis" style="display: none;" onchange="importerDevis(event)">
+        <button onclick="document.getElementById('importer-devis').click()">Importer un fichier JSON</button>
+        <button onclick="afficherPopupAjout()">Ajouter un article</button>
+        <button onclick="envoyerParWhatsApp()">Envoyer par WhatsApp</button>
+    </div>
+
+    <!-- Popup d'ajout d'article (masqué lors de l'impression) -->
+    <div id="popup-ajout" style="display: none; position: fixed; top: 40%; left: 20%; width: 20%; background: white; border: 1px solid #ccc; padding: 20px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);">
+        <h3>Ajouter un article</h3>
+        <label for="ajout-nom">Nom:</label>
+        <input type="text" id="ajout-nom" required><br><br>
+        <label for="ajout-prix">Prix:</label>
+        <input type="number" id="ajout-prix" step="0.01" required><br><br>
+        <label for="ajout-quantite">Quantité:</label>
+        <input type="number" id="ajout-quantite" min="1" required><br><br>
+        <label for="ajout-photo">Photo (URL):</label>
+        <input type="text" id="ajout-photo" required><br><br>
+        <button onclick="ajouterArticle()">Ajouter</button>
+        <button onclick="fermerPopupAjout()">Annuler</button>
     </div>
 
     <script src="script.js"></script>
