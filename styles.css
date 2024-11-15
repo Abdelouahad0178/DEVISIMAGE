@@ -1,0 +1,75 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+#produits-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.produit {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+    width: 150px;
+}
+
+.produit img {
+    max-width: 100%;
+    height: auto;
+}
+
+button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    border: 1px solid #ccc;
+    padding: 4px;
+    text-align: center;
+}
+
+#total-devis {
+    margin-top: 20px;
+    font-weight: bold;
+}
+/* Styles pour la palette déroulante */
+#palette-container {
+    display: flex;
+    overflow-x: auto;
+    gap: 10px; /* Espace entre les images */
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+#palette-container img {
+    height: 100px;
+    width: 100px;
+    object-fit: cover;
+    cursor: pointer;
+    border: 2px solid transparent;
+    border-radius: 5px;
+    transition: transform 0.2s, border-color 0.2s;
+}
+
+#palette-container img:hover {
+    transform: scale(1.1); /* Agrandit légèrement l'image au survol */
+    border-color: #007BFF;
+}

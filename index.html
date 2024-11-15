@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Production de Devis</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Production de Devis</h1>
+
+    <!-- Zone de recherche -->
+    <div>
+        <input type="text" id="search-bar" placeholder="Rechercher un produit..." oninput="rechercherProduit()">
+    </div>
+
+    <!-- Palette déroulante horizontale -->
+    <div id="palette-container" style="overflow-x: auto; white-space: nowrap; border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
+        <!-- Les photos des produits seront chargées ici -->
+    </div>
+
+    <!-- Section du devis -->
+    <h2>Devis</h2>
+    <div id="devis-container">
+        <table id="devis">
+            <thead>
+                <tr>
+                    <th>Produit</th>
+                    <th>Prix (modifiable)</th>
+                    <th>Quantité</th>
+                    <th>Total</th>
+                    <th>Photo</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <h6 id="total-devis">Total: 0 DH</h6>
+    </div>
+
+    <!-- Boutons d'actions -->
+    <div style="margin-top: 20px;">
+        <button onclick="imprimerDevis()">Imprimer le devis</button>
+        <button onclick="reinitialiserDevis()" style="background-color: red; color: white;">Réinitialiser le devis</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
