@@ -206,15 +206,9 @@ function imprimerDevis() {
 
 // Charger le devis au démarrage
 chargerDevis();
-
-function envoyerParWhatsApp() {
+function envoyerPhotoParWhatsApp() {
     const clientName = document.getElementById('client-name').value;
     const phone = document.getElementById('phone').value;
-    const devisContent = devis.map(produit => 
-        `- Produit: ${produit.nom}, Quantité: ${produit.quantite}, Total: ${produit.total.toFixed(2)} DH`
-    ).join('\n');
-    
-    const total = devis.reduce((sum, produit) => sum + produit.total, 0).toFixed(2);
 
     if (!phone || !clientName) {
         alert("Veuillez remplir le nom du client et le numéro de téléphone.");
@@ -223,11 +217,19 @@ function envoyerParWhatsApp() {
 
     const message = `
         Bonjour ${clientName},
-        Voici votre devis :
-        ${devisContent}
-        Total Général: ${total} DH
+        Nous vous remercions pour votre confiance !
+        Voici une copie de votre devis. Veuillez confirmer par téléphone.
+        Merci et excellente journée !
     `.trim();
 
-    const whatsappLink = `https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(message)}`;
-    window.open(whatsappLink, '_blank');
+    html2canvas(document.body).then(canvas => {
+        canvas.toBlob(blob => {
+            const whatsappLink = `https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(message)}`;
+            alert("Capture d'écran prête. Ajoutez-la dans WhatsApp.");
+            window.open(whatsappLink, '_blank');
+        });
+    }).catch(error => {
+        console.error("Erreur lors de la capture de la page :", error);
+        alert("Une erreur s'est produite. Veuillez réessayer.");
+    });
 }

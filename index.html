@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Production de Devis</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas"></script>
 </head>
 <body>
     <!-- En-tête de la facture -->
     <div id="header-container">
-        <!-- Première partie de l'en-tête -->
         <div id="header-top">
             <img src="/images/MAISON CARRELAGE.jpg" alt="En-tête de Maison Carrelage" id="header-image">
             <div id="devis-number">
@@ -17,8 +17,6 @@
                 <input type="text" id="facture" placeholder="FC24100033">
             </div>
         </div>
-        
-        <!-- Deuxième partie de l'en-tête -->
         <div id="header-info">
             <div>
                 <label for="date">Date:</label>
@@ -36,9 +34,6 @@
                 <label for="phone">Téléphone Client:</label>
                 <input type="text" id="phone" placeholder="Ex: +212600000000">
             </div>
-
-
-
             <div>
                 <label for="ice">ICE Client:</label>
                 <input type="text" id="ice" placeholder="003472596000011">
@@ -48,12 +43,12 @@
 
     <h1>Production de Devis</h1>
 
-    <!-- Zone de recherche (masquée lors de l'impression) -->
+    <!-- Zone de recherche -->
     <div>
         <input type="text" id="search-bar" placeholder="Rechercher un produit..." oninput="rechercherProduit()">
     </div>
 
-    <!-- Palette déroulante horizontale (masquée lors de l'impression) -->
+    <!-- Palette de produits -->
     <div id="palette-container" style="overflow-x: auto; white-space: nowrap; border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
         <!-- Les photos des produits seront chargées ici -->
     </div>
@@ -63,11 +58,11 @@
         <table id="devis">
             <thead>
                 <tr>
-                    <th class="produit-col">Produit</th>
-                    <th class="prix-col">Prix (modifiable)</th>
-                    <th class="quantite-col">Quantité</th>
-                    <th class="total-col">Total</th>
-                    <th class="photo-col">Photo</th>
+                    <th>Produit</th>
+                    <th>Prix (modifiable)</th>
+                    <th>Quantité</th>
+                    <th>Total</th>
+                    <th>Photo</th>
                 </tr>
             </thead>
             <tbody></tbody>
@@ -80,14 +75,11 @@
         <p><strong>Date:</strong> <span id="print-date"></span></p>
         <p><strong>Code:</strong> <span id="print-code"></span></p>
         <p><strong>Nom Client:</strong> <span id="print-client-name"></span></p>
-        
-        
-        
         <p><strong>DEVIS N°:</strong> <span id="print-facture"></span></p>
         <p><strong>ICE Client:</strong> <span id="print-ice"></span></p>
     </div>
 
-    <!-- Boutons d'actions (masqués lors de l'impression) -->
+    <!-- Boutons d'actions -->
     <div style="margin-top: 20px;">
         <button onclick="imprimerDevis()">Imprimer le devis</button>
         <button onclick="reinitialiserDevis()" style="background-color: red; color: white;">Réinitialiser le devis</button>
@@ -95,11 +87,11 @@
         <input type="file" id="importer-devis" style="display: none;" onchange="importerDevis(event)">
         <button onclick="document.getElementById('importer-devis').click()">Importer un fichier JSON</button>
         <button onclick="afficherPopupAjout()">Ajouter un article</button>
-        <button onclick="envoyerParWhatsApp()">Envoyer par WhatsApp</button>
+        <button onclick="envoyerPhotoParWhatsApp()">Envoyer par WhatsApp</button>
     </div>
 
-    <!-- Popup d'ajout d'article (masqué lors de l'impression) -->
-    <div id="popup-ajout" style="display: none; position: fixed; top: 40%; left: 20%; width: 20%; background: white; border: 1px solid #ccc; padding: 20px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);">
+    <!-- Popup d'ajout d'article -->
+    <div id="popup-ajout" style="display: none;">
         <h3>Ajouter un article</h3>
         <label for="ajout-nom">Nom:</label>
         <input type="text" id="ajout-nom" required><br><br>
@@ -114,5 +106,22 @@
     </div>
 
     <script src="script.js"></script>
+    <script>
+        function imprimerDevis() {
+            const dateValue = document.getElementById('date').value;
+            const codeValue = document.getElementById('code').value;
+            const clientName = document.getElementById('client-name').value;
+            const facture = document.getElementById('facture').value;
+            const ice = document.getElementById('ice').value;
+
+            document.getElementById('print-date').innerText = dateValue;
+            document.getElementById('print-code').innerText = codeValue;
+            document.getElementById('print-client-name').innerText = clientName;
+            document.getElementById('print-facture').innerText = facture;
+            document.getElementById('print-ice').innerText = ice;
+
+            window.print();
+        }
+    </script>
 </body>
 </html>
