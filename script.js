@@ -255,4 +255,4 @@ function envoyerPhotoParWhatsApp() {
         console.error("Erreur lors de la capture de la page :", error);
         alert("Une erreur s'est produite. Veuillez réessayer.");
     });
-}
+};

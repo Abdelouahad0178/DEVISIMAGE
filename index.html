@@ -81,6 +81,10 @@
         <button onclick="imprimerDevis()">Imprimer le devis</button>
         <button onclick="reinitialiserDevis()" style="background-color: red; color: white;">Réinitialiser le devis</button>
         <button onclick="exporterDevis()">Enregistrer en JSON</button>
+      
+
+
+
         <input type="file" id="importer-devis" style="display: none;" onchange="importerDevis(event)">
         <button onclick="document.getElementById('importer-devis').click()">Importer un fichier JSON</button>
         <button onclick="afficherPopupAjout()">Ajouter un article</button>
@@ -101,6 +105,7 @@
         <button onclick="ajouterArticle()">Ajouter</button>
         <button onclick="fermerPopupAjout()">Annuler</button>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas"></script>
 
     <script src="script.js"></script>
     
