@@ -70,7 +70,6 @@
     <!-- Affichage des informations pour l'impression -->
     <div id="print-header-info" style="display: none;">
         <p><strong>Date:</strong> <span id="print-date"></span></p>
-       
         <p><strong>Nom Client:</strong> <span id="print-client-name"></span></p>
         <p><strong>DEVIS N°:</strong> <span id="print-facture"></span></p>
         <p><strong>ICE Client:</strong> <span id="print-ice"></span></p>
@@ -78,13 +77,9 @@
 
     <!-- Boutons d'actions -->
     <div style="margin-top: 20px;">
-        <button onclick="imprimerDevis()">Imprimer le devis</button>
+        <button onclick="afficherOptionsImpression()">Aperçu avant impression</button>
         <button onclick="reinitialiserDevis()" style="background-color: red; color: white;">Réinitialiser le devis</button>
         <button onclick="exporterDevis()">Enregistrer en JSON</button>
-      
-
-
-
         <input type="file" id="importer-devis" style="display: none;" onchange="importerDevis(event)">
         <button onclick="document.getElementById('importer-devis').click()">Importer un fichier JSON</button>
         <button onclick="afficherPopupAjout()">Ajouter un article</button>
@@ -105,9 +100,54 @@
         <button onclick="ajouterArticle()">Ajouter</button>
         <button onclick="fermerPopupAjout()">Annuler</button>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/html2canvas"></script>
 
-    <script src="script.js"></script>
+    <!-- Popup des options d'impression -->
+    <div id="popup-impression" style="display: none;">
+        <h3>Options d'Aperçu</h3>
+        <label for="font-family">Police :</label>
+        <select id="font-family">
+            <option value="Arial">Arial</option>
+            <option value="Times New Roman">Times New Roman</option>
+            <option value="Roboto">Roboto</option>
+            <option value="Verdana">Verdana</option>
+        </select>
+        <br><br>
+
+        <label for="font-size">Taille du texte :</label>
+        <input type="number" id="font-size" min="10" max="30" value="14"> px
+        <br><br>
+
+        <label for="font-weight">Épaisseur du texte :</label>
+        <select id="font-weight">
+            <option value="normal">Normal</option>
+            <option value="bold">Gras</option>
+            <option value="100">100</option>
+            <option value="200">200</option>
+            <option value="300">300</option>
+            <option value="400">400</option>
+            <option value="500">500</option>
+            <option value="600">600</option>
+            <option value="700">700</option>
+            <option value="800">800</option>
+            <option value="900">900</option>
+        </select>
+        <br><br>
+
+        <label for="text-color">Couleur du texte :</label>
+        <input type="color" id="text-color" value="#333333">
+        <br><br>
+
+        <label for="background-color">Couleur d'arrière-plan :</label>
+        <input type="color" id="background-color" value="#ffffff">
+        <br><br>
+
+        <button onclick="appliquerStylesEtImprimer()">Appliquer et Voir l'Aperçu</button>
+        <button onclick="fermerOptionsImpression()">Annuler</button>
+    </div>
+
+
     
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas"></script>
+    <script src="script.js"></script>
 </body>
 </html>

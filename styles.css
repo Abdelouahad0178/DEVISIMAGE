@@ -187,7 +187,8 @@ td img {
 }
 
 /* Popup d'ajout d'article */
-#popup-ajout {
+#popup-ajout,
+#popup-impression {
     display: none;
     position: fixed;
     top: 50%;
@@ -202,13 +203,16 @@ td img {
     z-index: 1000;
 }
 
-#popup-ajout h3 {
+#popup-ajout h3,
+#popup-impression h3 {
     margin-bottom: 15px;
     color: #0056b3;
 }
 
 #popup-ajout input[type="text"],
-#popup-ajout input[type="number"] {
+#popup-ajout input[type="number"],
+#popup-impression input,
+#popup-impression select {
     width: 100%;
     padding: 8px;
     margin: 10px 0;
@@ -217,35 +221,26 @@ td img {
     font-size: 14px;
 }
 
-#popup-ajout button {
+#popup-ajout button,
+#popup-impression button {
     margin-top: 10px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
 }
 
-/* Media Queries pour la responsivité */
-@media (max-width: 1440px) {
-    body {
-        margin: 15px;
-        font-size: 15px;
-    }
-    #header-info input {
-        width: 120px;
-    }
+#popup-impression label {
+    font-weight: bold;
 }
 
-@media (max-width: 1024px) {
-    #header-top {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-    #header-image {
-        max-width: 120px;
-    }
+#popup-impression {
+    max-width: 400px;
 }
 
+/* Responsivité */
 @media (max-width: 768px) {
-    #header-info {
-        gap: 10px;
-    }
     table th, table td {
         font-size: 12px;
         padding: 8px;
@@ -253,111 +248,39 @@ td img {
 }
 
 @media (max-width: 530px) {
-    h1 {
-        font-size: 18px;
-    }
     td img {
         max-height: 80px;
     }
 }
-
-@media (max-width: 420px) {
+/* Styles pour l'impression avec une image d'arrière-plan dynamique */
+@media print {
     body {
-        font-size: 10px;
-    }
-    td img {
-        max-height: 50px;
-    }
-}
-
-
-
-/* Styles d'impression */
-@media print {
-    #print-header-info {
-        display: none;
-        margin-bottom: 20px;
-        
-        font-size: 14px;
-    }
-
-    /* Masquer les éléments interactifs lors de l'impression */
-    #search-bar,
-    #palette-container,
-    .actions-col,
-    button {
-        display: none;
-    }
-
-    /* Supprimer les bordures et les interactions des champs de prix et quantité */
-    td input[type="number"], td input[type="text"] {
-        display: block;
-    }
-
-    td .display-only {
-        display: inline;
-    }
-
-    /* Impression - Images dans la colonne Photo */
-    td img {
-        width: 120px;
-        height: 120px;
-        object-fit: cover;
-    }
-}
-/* Styles d'impression */
-@media print {
-    /* Masquer les bordures et les interactions des champs de prix et quantité */
-     input[type="number"],  input[type="text"] ,input[type="date"] {
-        border: none; /* Supprimer les bordures */
-        background: transparent; /* Supprimer l'arrière-plan */
-        box-shadow: none; /* Supprimer les ombres */
-        outline: none; /* Supprimer le focus */
-    }
-
-    input[type="number"]:focus,  input[type="text"]:focus ,input[type="date"]:focus {
-        outline: none; /* Supprimer le focus */ 
-    }
-
-    /* Afficher uniquement la valeur dans les champs */
-     input {
-        display: inline-block;
-        text-align: center;
-        width: 100%;
-        border: none; /* Supprimer les bordures */
-        outline: none; /* Supprimer le focus */
-        
-    }
-
-    /* Autres ajustements pour impression */
-    td img {
-        width: 120px;
-        height: 120px;
-        object-fit: cover;
+        background-image: var(--print-background-image, none);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
     }
 
     button,
-    #palette-container,
     #search-bar,
+    #palette-container,
     .actions-col {
-        display: none; /* Masquer les éléments interactifs */
+        display: none;
     }
 
-    #devis-number {
-        
-        font-size: 18px;
-        font-weight: bold;
-        text-align: center;
-        margin-top: 30px;
-        margin: -6% 40% 3% 40%;
+    td img {
+        width: 120px;
+        height: 120px;
+    }
+
+    input[type="number"], input[type="text"], input[type="date"] {
         border: none;
+        background: transparent;
+        outline: none;
     }
 
-
-th {
-    color: #0056b3;
-    
-    font-weight: bold;
+    td input {
+        text-align: center;
+    }
 }
 
-}

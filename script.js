@@ -61,8 +61,7 @@ function ajouterAuDevis(nom, prix, image) {
     afficherDevis();
 }
 
-
-
+// Afficher le devis
 function afficherDevis() {
     devisTableBody.innerHTML = '';
     let totalGeneral = 0;
@@ -92,13 +91,7 @@ function afficherDevis() {
                 <img 
                     src="${produit.image}" 
                     alt="${produit.nom}" 
-                    style="
-                        max-width: 120px; /* Limite la largeur */
-                        max-height: 120px; /* Limite la hauteur */
-                        width: auto; /* Respecte les proportions */
-                        height: auto; /* Respecte les proportions */
-                        object-fit: contain; /* Ne coupe pas l'image */
-                    ">
+                    style="max-width: 120px; max-height: 120px; object-fit: contain;">
             </td>
             <td>
                 <button onclick="supprimerProduit(${index})">Supprimer</button>
@@ -109,7 +102,6 @@ function afficherDevis() {
     });
     document.getElementById('total-devis').innerText = `Total: ${totalGeneral.toFixed(2)} DH`;
 }
-
 
 // Mettre à jour le prix d'un produit
 function mettreAJourPrix(input) {
@@ -122,7 +114,7 @@ function mettreAJourPrix(input) {
         afficherDevis();
     } else {
         alert("Le prix doit être supérieur ou égal à 0 !");
-        input.value = devis[index].prix; // Restaurer le prix précédent
+        input.value = devis[index].prix;
     }
 }
 
@@ -137,13 +129,13 @@ function mettreAJourQuantite(input) {
         afficherDevis();
     } else {
         alert("La quantité doit être supérieure à 0 !");
-        input.value = devis[index].quantite; // Restaurer la quantité précédente
+        input.value = devis[index].quantite;
     }
 }
 
 // Supprimer un produit du devis
 function supprimerProduit(index) {
-    devis.splice(index, 1); // Supprime l'article de la liste
+    devis.splice(index, 1);
     enregistrerDevis();
     afficherDevis();
 }
@@ -204,20 +196,43 @@ function ajouterArticle() {
     }
 }
 
-// Impression du devis avec l'en-tête
-function imprimerDevis() {
-    document.getElementById('print-date').innerText = document.getElementById('date').value;
-    
-    document.getElementById('print-client-name').innerText = document.getElementById('client-name').value;
-    document.getElementById('print-facture').innerText = document.getElementById('facture').value;
-    document.getElementById('print-ice').innerText = document.getElementById('ice').value;
+// Afficher les options d'impression
+function afficherOptionsImpression() {
+    document.getElementById('popup-impression').style.display = 'block';
+}
 
-    window.print();
+// Fermer les options d'impression
+function fermerOptionsImpression() {
+    document.getElementById('popup-impression').style.display = 'none';
+}
+
+// Appliquer les styles personnalisés et imprimer
+
+
+
+function appliquerStylesEtImprimer() {
+    const fontFamily = document.getElementById('font-family').value;
+    const fontSize = document.getElementById('font-size').value + 'px';
+    const fontWeight = document.getElementById('font-weight').value;
+    const textColor = document.getElementById('text-color').value;
+    const backgroundColor = document.getElementById('background-color').value;
+
+    // Ajouter une classe pour le style d'impression
+    document.documentElement.style.setProperty('--print-background-color', backgroundColor);
+    document.body.style.fontFamily = fontFamily;
+    document.body.style.fontSize = fontSize;
+    document.body.style.fontWeight = fontWeight;
+    document.body.style.color = textColor;
+
+    fermerOptionsImpression();
+
+    setTimeout(() => window.print(), 500);
 }
 
 // Charger le devis au démarrage
 chargerDevis();
 
+// Envoyer le devis par WhatsApp
 function envoyerPhotoParWhatsApp() {
     const clientName = document.getElementById('client-name').value;
     const phone = document.getElementById('phone').value;
@@ -227,32 +242,11 @@ function envoyerPhotoParWhatsApp() {
         return;
     }
 
-    const message = `
-        Bonjour ${clientName},
-        Nous vous remercions pour votre confiance !
-        Voici une copie de votre devis. Veuillez confirmer par téléphone.
-        Merci et excellente journée !
-    `.trim();
+    const message = `Bonjour ${clientName}, Voici votre devis.`;
 
-    // Capture de l'écran
     html2canvas(document.body).then(canvas => {
-        // Convertir l'image en base64
-        const imageBase64 = canvas.toDataURL();  // Image au format base64
-
-        // Créer un message incluant l'URL de l'image (l'utilisateur devra télécharger l'image)
-        const whatsappMessage = `
-            ${message}
-            Voici l'image de votre devis : ${imageBase64}
-        `.trim();
-
-        // L'URL WhatsApp pour envoyer le message
-        const whatsappLink = `https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(whatsappMessage)}`;
-
-        // Affichage de l'image et envoi du lien
-        alert("Capture d'écran prête. Cliquez sur le lien pour ouvrir WhatsApp et envoyer l'image.");
+        const imageBase64 = canvas.toDataURL();
+        const whatsappLink = `https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(message)}`;
         window.open(whatsappLink, '_blank');
-    }).catch(error => {
-        console.error("Erreur lors de la capture de la page :", error);
-        alert("Une erreur s'est produite. Veuillez réessayer.");
     });
-};
+}
