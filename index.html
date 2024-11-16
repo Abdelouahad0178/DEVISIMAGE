@@ -14,34 +14,31 @@
             <img src="/images/MAISON CARRELAGE.jpg" alt="En-tête de Maison Carrelage" id="header-image">
             <div id="devis-number">
                 <label for="facture">DEVIS N°:</label>
-                <input type="text" id="facture" placeholder="FC24100033">
+                <input type="text" id="facture" placeholder="Enter N° Devis">
             </div>
         </div>
         <div id="header-info">
             <div>
                 <label for="date">Date:</label>
-                <input type="date" id="date" value="2024-11-10">
+                <input type="date" id="date" value="">
             </div>
-            <div>
-                <label for="code">Code:</label>
-                <input type="text" id="code" placeholder="Entrer le code">
-            </div>
+            
             <div>
                 <label for="client-name">Nom Client:</label>
                 <input type="text" id="client-name" placeholder="Nom du client">
             </div>
             <div>
                 <label for="phone">Téléphone Client:</label>
-                <input type="text" id="phone" placeholder="Ex: +212600000000">
+                <input type="text" id="phone" placeholder="Entrer N° Tel">
             </div>
             <div>
                 <label for="ice">ICE Client:</label>
-                <input type="text" id="ice" placeholder="003472596000011">
+                <input type="text" id="ice" placeholder="Entrer ICE Client">
             </div>
         </div>
     </div>
 
-    <h1>Production de Devis</h1>
+    <h1>Listes des Articles</h1>
 
     <!-- Zone de recherche -->
     <div>
@@ -59,7 +56,7 @@
             <thead>
                 <tr>
                     <th>Produit</th>
-                    <th>Prix (modifiable)</th>
+                    <th>Prix </th>
                     <th>Quantité</th>
                     <th>Total</th>
                     <th>Photo</th>
@@ -71,9 +68,9 @@
     </div>
 
     <!-- Affichage des informations pour l'impression -->
-    <div id="print-header-info">
+    <div id="print-header-info" style="display: none;">
         <p><strong>Date:</strong> <span id="print-date"></span></p>
-        <p><strong>Code:</strong> <span id="print-code"></span></p>
+       
         <p><strong>Nom Client:</strong> <span id="print-client-name"></span></p>
         <p><strong>DEVIS N°:</strong> <span id="print-facture"></span></p>
         <p><strong>ICE Client:</strong> <span id="print-ice"></span></p>
@@ -106,22 +103,6 @@
     </div>
 
     <script src="script.js"></script>
-    <script>
-        function imprimerDevis() {
-            const dateValue = document.getElementById('date').value;
-            const codeValue = document.getElementById('code').value;
-            const clientName = document.getElementById('client-name').value;
-            const facture = document.getElementById('facture').value;
-            const ice = document.getElementById('ice').value;
-
-            document.getElementById('print-date').innerText = dateValue;
-            document.getElementById('print-code').innerText = codeValue;
-            document.getElementById('print-client-name').innerText = clientName;
-            document.getElementById('print-facture').innerText = facture;
-            document.getElementById('print-ice').innerText = ice;
-
-            window.print();
-        }
-    </script>
+    
 </body>
 </html>

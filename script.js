@@ -61,7 +61,8 @@ function ajouterAuDevis(nom, prix, image) {
     afficherDevis();
 }
 
-// Afficher le devis
+
+
 function afficherDevis() {
     devisTableBody.innerHTML = '';
     let totalGeneral = 0;
@@ -74,7 +75,7 @@ function afficherDevis() {
                     type="number" 
                     value="${produit.prix}" 
                     min="0" 
-                    step="0.01" 
+                    step="1" 
                     data-index="${index}" 
                     onchange="mettreAJourPrix(this)">
             </td>
@@ -88,7 +89,16 @@ function afficherDevis() {
             </td>
             <td>${produit.total.toFixed(2)} DH</td>
             <td>
-                <img src="${produit.image}" alt="${produit.nom}" style="width: 100px; height: 100px; object-fit: cover;">
+                <img 
+                    src="${produit.image}" 
+                    alt="${produit.nom}" 
+                    style="
+                        max-width: 120px; /* Limite la largeur */
+                        max-height: 120px; /* Limite la hauteur */
+                        width: auto; /* Respecte les proportions */
+                        height: auto; /* Respecte les proportions */
+                        object-fit: contain; /* Ne coupe pas l'image */
+                    ">
             </td>
             <td>
                 <button onclick="supprimerProduit(${index})">Supprimer</button>
@@ -99,6 +109,7 @@ function afficherDevis() {
     });
     document.getElementById('total-devis').innerText = `Total: ${totalGeneral.toFixed(2)} DH`;
 }
+
 
 // Mettre à jour le prix d'un produit
 function mettreAJourPrix(input) {
@@ -196,7 +207,7 @@ function ajouterArticle() {
 // Impression du devis avec l'en-tête
 function imprimerDevis() {
     document.getElementById('print-date').innerText = document.getElementById('date').value;
-    document.getElementById('print-code').innerText = document.getElementById('code').value;
+    
     document.getElementById('print-client-name').innerText = document.getElementById('client-name').value;
     document.getElementById('print-facture').innerText = document.getElementById('facture').value;
     document.getElementById('print-ice').innerText = document.getElementById('ice').value;
@@ -206,6 +217,7 @@ function imprimerDevis() {
 
 // Charger le devis au démarrage
 chargerDevis();
+
 function envoyerPhotoParWhatsApp() {
     const clientName = document.getElementById('client-name').value;
     const phone = document.getElementById('phone').value;
@@ -222,12 +234,23 @@ function envoyerPhotoParWhatsApp() {
         Merci et excellente journée !
     `.trim();
 
+    // Capture de l'écran
     html2canvas(document.body).then(canvas => {
-        canvas.toBlob(blob => {
-            const whatsappLink = `https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(message)}`;
-            alert("Capture d'écran prête. Ajoutez-la dans WhatsApp.");
-            window.open(whatsappLink, '_blank');
-        });
+        // Convertir l'image en base64
+        const imageBase64 = canvas.toDataURL();  // Image au format base64
+
+        // Créer un message incluant l'URL de l'image (l'utilisateur devra télécharger l'image)
+        const whatsappMessage = `
+            ${message}
+            Voici l'image de votre devis : ${imageBase64}
+        `.trim();
+
+        // L'URL WhatsApp pour envoyer le message
+        const whatsappLink = `https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(whatsappMessage)}`;
+
+        // Affichage de l'image et envoi du lien
+        alert("Capture d'écran prête. Cliquez sur le lien pour ouvrir WhatsApp et envoyer l'image.");
+        window.open(whatsappLink, '_blank');
     }).catch(error => {
         console.error("Erreur lors de la capture de la page :", error);
         alert("Une erreur s'est produite. Veuillez réessayer.");

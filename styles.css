@@ -9,6 +9,7 @@ body {
 h1, h2 {
     text-align: center;
     color: #0056b3;
+    font-size: 2rem;
 }
 
 /* Boutons généraux */
@@ -42,7 +43,6 @@ button.danger:hover {
     border-bottom: 2px solid #ccc;
 }
 
-/* Première partie de l'en-tête */
 #header-top {
     display: flex;
     align-items: center;
@@ -60,7 +60,6 @@ button.danger:hover {
     text-align: center;
 }
 
-/* Deuxième partie de l'en-tête */
 #header-info {
     display: flex;
     flex-wrap: wrap;
@@ -128,12 +127,11 @@ button.danger:hover {
 }
 
 #palette-container img {
-    height: 100px;
-    width: 100px;
-    object-fit: cover;
+    max-height: 100px;
+    max-width: 100%;
     cursor: pointer;
     border: 2px solid transparent;
-    border-radius: 8px;
+    border-radius: 0;
     transition: transform 0.3s, border-color 0.3s;
 }
 
@@ -171,10 +169,12 @@ td {
 }
 
 td img {
-    width: 80px;
-    height: 80px;
-    object-fit: cover;
-    border-radius: 5px;
+    width: auto;
+    height: auto;
+    max-height: 120px;
+    max-width: 120px;
+    object-fit: contain;
+    border-radius: 0;
 }
 
 /* Total devis */
@@ -221,32 +221,63 @@ td img {
     margin-top: 10px;
 }
 
-/* Images dans le devis */
-td img {
-    width: 80px;
-    height: 80px;
-    object-fit: cover;
-    border-radius: 5px;
-    margin: 0;
+/* Media Queries pour la responsivité */
+@media (max-width: 1440px) {
+    body {
+        margin: 15px;
+        font-size: 15px;
+    }
+    #header-info input {
+        width: 120px;
+    }
 }
 
-/* Informations pour l'impression */
-#print-header-info {
-    display: none;
-    margin-bottom: 20px;
-    font-size: 14px;
+@media (max-width: 1024px) {
+    #header-top {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    #header-image {
+        max-width: 120px;
+    }
 }
 
-#print-header-info p {
-    margin: 0;
-    color: #333;
+@media (max-width: 768px) {
+    #header-info {
+        gap: 10px;
+    }
+    table th, table td {
+        font-size: 12px;
+        padding: 8px;
+    }
 }
+
+@media (max-width: 530px) {
+    h1 {
+        font-size: 18px;
+    }
+    td img {
+        max-height: 80px;
+    }
+}
+
+@media (max-width: 420px) {
+    body {
+        font-size: 10px;
+    }
+    td img {
+        max-height: 50px;
+    }
+}
+
+
 
 /* Styles d'impression */
 @media print {
     #print-header-info {
         display: none;
         margin-bottom: 20px;
+        
         font-size: 14px;
     }
 
@@ -277,22 +308,25 @@ td img {
 /* Styles d'impression */
 @media print {
     /* Masquer les bordures et les interactions des champs de prix et quantité */
-    td input[type="number"], td input[type="text"] {
+     input[type="number"],  input[type="text"] ,input[type="date"] {
         border: none; /* Supprimer les bordures */
         background: transparent; /* Supprimer l'arrière-plan */
         box-shadow: none; /* Supprimer les ombres */
         outline: none; /* Supprimer le focus */
     }
 
-    td input[type="number"]:focus, td input[type="text"]:focus {
-        outline: none; /* Supprimer le focus */
+    input[type="number"]:focus,  input[type="text"]:focus ,input[type="date"]:focus {
+        outline: none; /* Supprimer le focus */ 
     }
 
     /* Afficher uniquement la valeur dans les champs */
-    td input {
+     input {
         display: inline-block;
         text-align: center;
         width: 100%;
+        border: none; /* Supprimer les bordures */
+        outline: none; /* Supprimer le focus */
+        
     }
 
     /* Autres ajustements pour impression */
@@ -308,4 +342,22 @@ td img {
     .actions-col {
         display: none; /* Masquer les éléments interactifs */
     }
+
+    #devis-number {
+        
+        font-size: 18px;
+        font-weight: bold;
+        text-align: center;
+        margin-top: 30px;
+        margin: 3% 40%;
+        border: none;
+    }
+
+
+th {
+    color: #0056b3;
+    
+    font-weight: bold;
+}
+
 }
