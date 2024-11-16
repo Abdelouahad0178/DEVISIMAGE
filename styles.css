@@ -78,10 +78,10 @@ button.danger:hover {
 }
 
 #header-info input {
-    padding: 5px;
+    padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    width: 150px;
+    width: 180px;
     font-size: 14px;
 }
 
