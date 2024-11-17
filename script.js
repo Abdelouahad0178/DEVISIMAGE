@@ -181,20 +181,26 @@ function afficherPopupAjout() {
 function fermerPopupAjout() {
     document.getElementById('popup-ajout').style.display = 'none';
 }
-
 function ajouterArticle() {
     const nom = document.getElementById('ajout-nom').value;
     const prix = parseFloat(document.getElementById('ajout-prix').value);
     const quantite = parseInt(document.getElementById('ajout-quantite').value, 10);
-    const photo = document.getElementById('ajout-photo').value;
+    const photoInput = document.getElementById('ajout-photo');
+    const file = photoInput.files[0];
 
-    if (nom && prix > 0 && quantite > 0 && photo) {
-        ajouterAuDevis(nom, prix, photo);
-        fermerPopupAjout();
+    if (nom && prix > 0 && quantite > 0 && file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            const photoBase64 = e.target.result; // URL de l'image en Base64
+            ajouterAuDevis(nom, prix, photoBase64); // Ajout au devis avec l'image
+            fermerPopupAjout();
+        };
+        reader.readAsDataURL(file);
     } else {
         alert("Veuillez remplir tous les champs correctement !");
     }
 }
+
 
 // Afficher les options d'impression
 function afficherOptionsImpression() {
